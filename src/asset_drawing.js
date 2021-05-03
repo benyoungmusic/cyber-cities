@@ -80,22 +80,6 @@ export default class Structure {
   }
 
   drawTriangles(ctx = this.ctx, start = [100, 100]) {
-    // this.drawTriangle(ctx, start)
-    // ctx.translate(start[0], start[1]);
-    // ctx.rotate(Math.PI / 2);
-    // ctx.translate(-1 * start[0], -1 * start[1]);
-    // this.drawTriangle(ctx, start)
-    // ctx.translate(start[0], start[1]);
-    // ctx.rotate(Math.PI / 2);
-    // ctx.translate(-1 * start[0], -1 * start[1]);
-    // this.drawTriangle(ctx, start)
-    // ctx.translate(start[0], start[1]);
-    // ctx.rotate(Math.PI / 2);
-    // ctx.translate(-1 * start[0], -1 * start[1]);
-    // this.drawTriangle(ctx, start)
-    // ctx.translate(start[0], start[1]);
-    // ctx.rotate(Math.PI / 3);
-    // ctx.translate(-1 * start[0], -1 * start[1]);
     this.drawTriangle(ctx, [start[0] - 20, start[1] -12])
     ctx.translate(start[0], start[1]);
     ctx.rotate(Math.PI / 2);
@@ -248,23 +232,3 @@ export default class Structure {
     this.drawRect(this.bloomctx, 6)
   }
 }
-
-
-
-  //arc params:
-  // x: The horizontal coordinate of the arc's center.
-  // y: The vertical coordinate of the arc's center.
-  // radius: The arc's radius. Must be positive.
-  // startAngle: The angle at which the arc starts in radians, measured from the positive x-axis. 
-  // endAngle:The angle at which the arc ends in radians, measured from the positive x-axis.
-  // optional: counterclockwise
-
-  //quardraticCurveParams:
-  // cpx
-  //     The x-axis coordinate of the control point.
-  // cpy
-  //     The y-axis coordinate of the control point.
-  // x
-  //     The x-axis coordinate of the end point.
-  // y
-  //     The y-axis coordinate of the end point.
