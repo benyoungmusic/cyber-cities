@@ -113,9 +113,10 @@ export default class CityBuilder {
         ) {
           this.offsetX = e.clientX - this.navStructures.base.center[0];
           this.offsetY = e.clientY - this.navStructures.base.center[1];
+          this.structures.base.push(this.navStructures.base.center);
+          console.log("bases", this.structures.base)
           document.body.addEventListener("mousemove", this.baseOnMouseMove);
           document.body.addEventListener("mouseup", this.baseOnMouseUp);
-          this.structures.base.push(this.navStructures.base.center);
         } else if (e.clientX > this.navStructures.building.start[0] - 20 &&
                     e.clientX < this.navStructures.building.start[0] + 20 &&
                     e.clientY > this.navStructures.building.start[1] - 20 &&
@@ -126,7 +127,8 @@ export default class CityBuilder {
           this.offsetY = e.clientY - this.navStructures.building.start[1];
           document.body.addEventListener("mousemove", this.buildingOnMouseMove)
           document.body.addEventListener("mouseup", this.buildingOnMouseUp)
-          this.structures.building.push(this.navStructures.building.start)          
+          console.log("buildings", this.structures.building)        
+          this.structures.building.push(this.navStructures.building.start)  
         } else if (e.clientX > this.navStructures.redRoad.start[0] - 10 &&
                     e.clientX < this.navStructures.redRoad.end[0] + 10 &&
                     e.clientY > this.navStructures.redRoad.start[1] - 10 &&
@@ -158,13 +160,13 @@ export default class CityBuilder {
   }
 
   baseOnMouseUp(e) {
-    console.log("mouseup")
+    console.log("basemouseup")
     document.body.removeEventListener("mousemove", this.baseOnMouseMove)
     document.body.removeEventListener("mouseup", this.baseOnMouseUp) 
   }
 
   buildingOnMouseUp(e) {
-    console.log("mouseup")
+    console.log("buildingmouseup")
     document.body.removeEventListener("mousemove", this.buildingOnMouseMove)
     document.body.removeEventListener("mouseup", this.buildingOnMouseUp) 
   }
