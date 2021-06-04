@@ -148,21 +148,39 @@ export default class Structure {
     this.bloomctx.closePath();
   }
 
-    drawGreenRoad(start = [100, 100], finish = [200, 200], ctx = this.ctx) {
+  drawRedCursor(pos = [100, 100], ctx = this.ctx) {
+    ctx.beginPath();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = 'rgb(255, 0, 0)';
+    ctx.arc(pos[0], pos[1], 3, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.closePath();
+  }
+
+  drawGreenCursor(pos = [100, 100], ctx = this.ctx) {
     ctx.beginPath();
     ctx.lineWidth = 5;
     ctx.strokeStyle = 'rgb(0, 255, 0)';
-    ctx.moveTo(start[0], start[1]);
-    ctx.lineTo(finish[0], finish[1]);
+    ctx.arc(pos[0], pos[1], 3, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.closePath();
-    this.bloomctx.beginPath();
-    this.bloomctx.lineWidth = 7;
-    this.bloomctx.strokeStyle = 'rgb(0, 255, 0)';
-    this.bloomctx.moveTo(start[0], start[1]);
-    this.bloomctx.lineTo(finish[0], finish[1]);
-    this.bloomctx.stroke();
-    this.bloomctx.closePath();
+  }
+
+  drawGreenRoad(start = [100, 100], finish = [200, 200], ctx = this.ctx) {
+  ctx.beginPath();
+  ctx.lineWidth = 6;
+  ctx.strokeStyle = 'rgb(0, 255, 0)';
+  ctx.moveTo(start[0], start[1]);
+  ctx.lineTo(finish[0], finish[1]);
+  ctx.stroke();
+  ctx.closePath();
+  this.bloomctx.beginPath();
+  this.bloomctx.lineWidth = 7;
+  this.bloomctx.strokeStyle = 'rgb(0, 255, 0)';
+  this.bloomctx.moveTo(start[0], start[1]);
+  this.bloomctx.lineTo(finish[0], finish[1]);
+  this.bloomctx.stroke();
+  this.bloomctx.closePath();
   }
 
   drawTriangle(ctx = this.ctx, start = [400, 400]) {
