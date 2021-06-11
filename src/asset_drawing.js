@@ -80,22 +80,6 @@ export default class Structure {
   }
 
   drawTriangles(ctx = this.ctx, start = [100, 100]) {
-    // this.drawTriangle(ctx, start)
-    // ctx.translate(start[0], start[1]);
-    // ctx.rotate(Math.PI / 2);
-    // ctx.translate(-1 * start[0], -1 * start[1]);
-    // this.drawTriangle(ctx, start)
-    // ctx.translate(start[0], start[1]);
-    // ctx.rotate(Math.PI / 2);
-    // ctx.translate(-1 * start[0], -1 * start[1]);
-    // this.drawTriangle(ctx, start)
-    // ctx.translate(start[0], start[1]);
-    // ctx.rotate(Math.PI / 2);
-    // ctx.translate(-1 * start[0], -1 * start[1]);
-    // this.drawTriangle(ctx, start)
-    // ctx.translate(start[0], start[1]);
-    // ctx.rotate(Math.PI / 3);
-    // ctx.translate(-1 * start[0], -1 * start[1]);
     this.drawTriangle(ctx, [start[0] - 20, start[1] -12])
     ctx.translate(start[0], start[1]);
     ctx.rotate(Math.PI / 2);
@@ -164,21 +148,39 @@ export default class Structure {
     this.bloomctx.closePath();
   }
 
-    drawGreenRoad(start = [100, 100], finish = [200, 200], ctx = this.ctx) {
+  drawRedCursor(pos = [100, 100], ctx = this.ctx) {
+    ctx.beginPath();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = 'rgb(255, 0, 0)';
+    ctx.arc(pos[0], pos[1], 3, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.closePath();
+  }
+
+  drawGreenCursor(pos = [100, 100], ctx = this.ctx) {
     ctx.beginPath();
     ctx.lineWidth = 5;
     ctx.strokeStyle = 'rgb(0, 255, 0)';
-    ctx.moveTo(start[0], start[1]);
-    ctx.lineTo(finish[0], finish[1]);
+    ctx.arc(pos[0], pos[1], 3, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.closePath();
-    this.bloomctx.beginPath();
-    this.bloomctx.lineWidth = 7;
-    this.bloomctx.strokeStyle = 'rgb(0, 255, 0)';
-    this.bloomctx.moveTo(start[0], start[1]);
-    this.bloomctx.lineTo(finish[0], finish[1]);
-    this.bloomctx.stroke();
-    this.bloomctx.closePath();
+  }
+
+  drawGreenRoad(start = [100, 100], finish = [200, 200], ctx = this.ctx) {
+  ctx.beginPath();
+  ctx.lineWidth = 6;
+  ctx.strokeStyle = 'rgb(0, 255, 0)';
+  ctx.moveTo(start[0], start[1]);
+  ctx.lineTo(finish[0], finish[1]);
+  ctx.stroke();
+  ctx.closePath();
+  this.bloomctx.beginPath();
+  this.bloomctx.lineWidth = 7;
+  this.bloomctx.strokeStyle = 'rgb(0, 255, 0)';
+  this.bloomctx.moveTo(start[0], start[1]);
+  this.bloomctx.lineTo(finish[0], finish[1]);
+  this.bloomctx.stroke();
+  this.bloomctx.closePath();
   }
 
   drawTriangle(ctx = this.ctx, start = [400, 400]) {
@@ -248,23 +250,3 @@ export default class Structure {
     this.drawRect(this.bloomctx, 6)
   }
 }
-
-
-
-  //arc params:
-  // x: The horizontal coordinate of the arc's center.
-  // y: The vertical coordinate of the arc's center.
-  // radius: The arc's radius. Must be positive.
-  // startAngle: The angle at which the arc starts in radians, measured from the positive x-axis. 
-  // endAngle:The angle at which the arc ends in radians, measured from the positive x-axis.
-  // optional: counterclockwise
-
-  //quardraticCurveParams:
-  // cpx
-  //     The x-axis coordinate of the control point.
-  // cpy
-  //     The y-axis coordinate of the control point.
-  // x
-  //     The x-axis coordinate of the end point.
-  // y
-  //     The y-axis coordinate of the end point.
