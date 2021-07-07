@@ -51,3 +51,24 @@
   transform: translateX(-50%);
   z-index: 6;
 }
+
+#instructions {
+  position: absolute;
+  top: 600px;
+  left: 50%;
+  width: 900px;
+  transform: translateX(-50%);
+}
+
+#instructions * {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#cyber-landscape {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  z-index: -1;
+}
