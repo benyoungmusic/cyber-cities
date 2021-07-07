@@ -4,44 +4,50 @@
 
 #canvas {
   position: absolute;
-  left: 0;
+  left: 50%;
   top: 0;
+  transform: translateX(-50%);
   z-index: 0;
 }
 
 #bloom {
   position: absolute;
-  left: 0;
+  left: 50%;
   top: 0;
+  transform: translateX(-50%);
   z-index: 1;
   filter: blur(2px);
 }
 
 #drag-canvas {
   position: absolute;
-  left: 0;
+  left: 50%;
   top: 0;
+  transform: translateX(-50%);
   z-index: 2;
 }
 
 #building-bar {
   position: absolute;
-  left: 0;
+  left: 50%;
   top: 0;
+  transform: translateX(-50%);
   z-index: 4;
 }
 
 #building-bar-bloom {
   position: absolute;
-  left: 0;
+  left: 50%;
   top: 0;
+  transform: translateX(-50%);
   z-index: 5;
   filter: blur(1px);
 }
 
 #building-icons {
   position: absolute;
-  left: 0;
+  left: 50%;
   top: 0;
+  transform: translateX(-50%);
   z-index: 6;
 }

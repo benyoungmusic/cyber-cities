@@ -166,6 +166,15 @@ export default class Structure {
     ctx.closePath();
   }
 
+  drawPeople(pos = [100, 100], ctx = this.ctx) {
+    ctx.beginPath();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = 'rgb(255, 255, 255)';
+    ctx.arc(pos[0], pos[1], 3, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.closePath();
+  }
+
   drawGreenRoad(start = [100, 100], finish = [200, 200], ctx = this.ctx) {
   ctx.beginPath();
   ctx.lineWidth = 6;

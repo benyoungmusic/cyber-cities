@@ -47,7 +47,8 @@ export default class CityBuilder {
     base: [],
     building: [],
     redRoad: [],
-    greenRoad: []
+    greenRoad: [],
+    people: []
   }
   this.dragCanvas = dragCanvas;
   this.dragCtx = dragCanvas.getContext('2d');
@@ -92,7 +93,7 @@ export default class CityBuilder {
     // this.firstStructure.drawRect(this.buildingIcons, [this.screenWidth * 14/20 - 10, this.screenHeight * (11/12) - 10], this.screenWidth * 2/20 + 20, 20)
     // this.firstStructure.drawTriangleBase()
     // this.firstStructure.drawBase();
-    // this.draw();
+    this.draw();
     this.newMouseStuff();
   }
 
@@ -167,7 +168,6 @@ export default class CityBuilder {
 
   greenRoadOnMouseMove1(e) {
     this.roadCursor = [e.clientX, e.clientY];
-    this.draw();
   }
 
   greenRoadOnMouseDown1(e) {
@@ -183,7 +183,6 @@ export default class CityBuilder {
     console.log(this.structures.greenRoad)
     this.roadCursor = [e.clientX, e.clientY];
     this.structures.greenRoad[this.structures.greenRoad.length - 1][1] = [e.clientX, e.clientY];
-    this.draw();
   }
 
   greenRoadOnMouseDown2(e) {
@@ -191,24 +190,20 @@ export default class CityBuilder {
     this.drawingRoad = false;
     document.body.removeEventListener("mousemove", this.greenRoadOnMouseMove2);
     document.body.removeEventListener("mousedown", this.greenRoadOnMouseDown2);
-    this.draw();
   }
 
   baseOnMouseMove(e) {
     this.structures.base[this.structures.base.length - 1] = 
       [e.clientX - this.offsetX, e.clientY - this.offsetY];
-    this.draw();
   }
 
   buildingOnMouseMove(e) {
     this.structures.building[this.structures.building.length - 1] = 
       [e.clientX - this.offsetX, e.clientY - this.offsetY];
-    this.draw();
   }
 
   redRoadOnMouseMove1(e) {
     this.roadCursor = [e.clientX, e.clientY];
-    this.draw();
   }
 
   redRoadOnMouseDown1(e) {
@@ -224,15 +219,21 @@ export default class CityBuilder {
     console.log(this.structures.redRoad)
     this.roadCursor = [e.clientX, e.clientY];
     this.structures.redRoad[this.structures.redRoad.length - 1][1] = [e.clientX, e.clientY];
-    this.draw();
   }
 
   redRoadOnMouseDown2(e) {
-    console.log("red road mouse down2");
     this.drawingRoad = false;
     document.body.removeEventListener("mousemove", this.redRoadOnMouseMove2);
     document.body.removeEventListener("mousedown", this.redRoadOnMouseDown2);
-    this.draw();
+    let lastRedRoad = this.structures.redRoad[this.structures.redRoad.length - 1]
+    setInterval(() => {
+      this.structures.people.push({
+        vector: this.getVector(lastRedRoad[0], lastRedRoad[1]),
+        end: lastRedRoad[1],
+        current: lastRedRoad[0],
+        delete: false
+      })
+    }, 1000);
   }
 
   baseOnMouseUp(e) {
@@ -255,9 +256,7 @@ export default class CityBuilder {
     this.firstStructure.drawBase(this.navStructures.base.center);
     this.firstStructure.drawTriangleBase(this.navStructures.building.start);
     this.structures.base.forEach(center => this.firstStructure.drawBase(center));
-    // console.log(this.structures.base)
     this.structures.building.forEach(start => this.firstStructure.drawTriangleBase(start));
-    // console.log(this.structures.building)
     if (this.drawingRoad) {
       if (this.drawingRoad === "red") {
         this.firstStructure.drawRedCursor(this.roadCursor)
@@ -267,7 +266,54 @@ export default class CityBuilder {
     }
     this.structures.redRoad.forEach(coords => this.firstStructure.drawRedRoad(coords[0], coords[1]));
     this.structures.greenRoad.forEach(coords => this.firstStructure.drawGreenRoad(coords[0], coords[1]));
+    this.structures.people.forEach((person, i) => (
+      this.structures.people[i].current = this.movePerson(person)
+      ));
+    this.structures.people.forEach((person, i) => {
+      this.structures.people[i].delete = this.checkPersonDelete(person);
+    })
+    this.structures.people = this.structures.people.filter(person => person.delete === false)
+    this.structures.people.forEach(person => this.firstStructure.drawPeople([person.current[0], person.current[1]]));
+    requestAnimationFrame(this.draw.bind(this));
+  }
+
+  getVector(start, end) {
+    let diff = [(end[0] - start[0]), (end[1] - start[1])];
+    let distance = Math.sqrt((diff[0] * diff[0]) + (diff[1] * diff[1]));
+    let vector = [(diff[0] / distance), (diff[1] / distance)];
+    return vector;
+  }
+
+  movePerson(person) {
+    return [person.current[0] + person.vector[0], person.current[1] + person.vector[1]];
+  }
+
+  checkPersonDelete(person) {
+    let direction = [];
+    if (person.vector[0] > 0) {direction[0] = 1} else {direction[0] = (-1)};
+    if (person.vector[1] > 0) { direction[1] = 1 } else {direction[1] = (-1)};
+
+    if (direction[0] === 1) {
+      if (person.current[0] > person.end[0]) { return true }
+    } else {
+      if (person.current[0] < person.end[0]) { return true }
+    }
+
+    if (direction[1] === 1) {
+      if (person.current[1] > person.end[1]) { return true }
+    } else {
+      if (person.current[1] < person.end[1]) { return true }
+    }
+
+    return false
   }
 
 
 }
+
+// each person:
+// {
+//    vector: [x, y]
+//    end: [x, y]
+//    current: [x, y]
+// }
