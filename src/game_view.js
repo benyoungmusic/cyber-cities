@@ -272,7 +272,6 @@ export default class CityBuilder {
     this.dragCtx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.bloomctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-    // this.drawBackground(this.ctx);
     this.firstStructure.drawBase(this.navStructures.base.center);
     this.firstStructure.drawTriangleBase(this.navStructures.building.start);
     this.structures.base.forEach(center => this.firstStructure.drawBase(center));
