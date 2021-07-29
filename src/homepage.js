@@ -24,7 +24,7 @@ export default class HomePage {
     console.log(canvas.width)
     console.log("homepagerender canvas", this.canvas)
     ctx.font = "30px Arial";
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "#42eff5";
     ctx.textAlign = "center";
     ctx.fillText("Digital Cities", canvas.width/2, canvas.height/2);
     ctx.font = "25px Arial";

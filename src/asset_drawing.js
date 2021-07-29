@@ -13,12 +13,8 @@ export default class Structure {
 
   drawRect(ctx, center, width, height) {
     ctx.strokeStyle = 'rgb(75, 255, 255)';
-    // ctx.strokeRect(center[0] - width/2, center[1] - height/2, width, height); // outline of a rectangle
     ctx.strokeRect(center[0], center[1], width, height); // outline of a rectangle
 
-    // this.bloomctx.lineWidth = 6
-    // this.bloomctx.strokeStyle = 'rgb(75, 255, 255)';
-    // this.bloomctx.strokeRect(center[0] - width/2, center[1] - height/2, width, height); // outline of a rectangle
   }
 
 
@@ -37,14 +33,7 @@ export default class Structure {
     ctx.rotate(Math.PI / 4);
     ctx.translate(-1 * center[0], -1 * center[1]);
     this.drawRect(ctx, center, width, height)
-    // ctx.translate(center[0], center[1]);
-    // ctx.rotate(Math.PI / 6);
-    // ctx.translate(-1 * center[0], -1 * center[1]);
-    // this.drawRect(ctx, center, width, height)
-    // ctx.translate(center[0], center[1]);
-    // ctx.rotate(Math.PI / 6);
-    // ctx.translate(-1 * center[0], -1 * center[1]);
-    // this.drawRect(ctx, center, width, height)
+
     ctx.setTransform(1, 0, 0, 1, 0, 0);
   }
 
@@ -166,6 +155,15 @@ export default class Structure {
     ctx.closePath();
   }
 
+  drawPeople(pos = [100, 100], ctx = this.ctx) {
+    ctx.beginPath();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = 'rgb(255, 255, 255)';
+    ctx.arc(pos[0], pos[1], 3, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.closePath();
+  }
+
   drawGreenRoad(start = [100, 100], finish = [200, 200], ctx = this.ctx) {
   ctx.beginPath();
   ctx.lineWidth = 6;
@@ -197,9 +195,6 @@ export default class Structure {
     let centerY = center[1];
     let sizeX = size[0];
     let sizeY = size[1];
-    //
-    // this.ctx.rotate(45 * Math.PI / 180)
-    // ctx.strokeStyle = 'red';
     ctx.beginPath();
     ctx.arc(
       centerX - sizeX/(10/3),
